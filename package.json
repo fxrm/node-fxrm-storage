@@ -19,6 +19,7 @@
     "jasmine-node": "~1.11.0"
   },
   "dependencies": {
-    "kew": "~0.3.0"
+    "kew": "~0.3.0",
+    "coffee-script": "~1.6.3"
   }
 }
