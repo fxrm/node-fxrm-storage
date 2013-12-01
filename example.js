@@ -1,5 +1,8 @@
+/*jshint node:true */
+'use strict';
 
-var Q = require('kew');
+var Q = require('kew'),
+    crypto = require('crypto');
 
 function Email(str) {
     if (str.length < 3 || str.indexOf('@') === -1) {
@@ -67,16 +70,14 @@ Application.prototype.login = function (email, password) {
 
         return userId ? this.getUserPasswordHash(userId) : null;
     }).then(function (passwordHash) {
-        var sessionId = new SessionId(),
-            sessionKey;
-
         if (!passwordHash || !passwordHash.check(password)) {
             throw new Error('LOGIN_CREDENTIALS');
         }
 
         return Q.nfcall(crypto.randomBytes, 18);
     }).then(function (sessionKeyBuf) {
-        var sessionKey = sessionKeyBuf.toString('base64');
+        var sessionKey = sessionKeyBuf.toString('base64'),
+            sessionId = new SessionId();
 
         this.initializeSession(sessionId, sessionKey, sessionUserId, Date.now());
         this.setUserLastSession(sessionUserId, sessionId);
