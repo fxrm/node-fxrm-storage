@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "kew": "~0.3.0",
-    "coffee-script": "~1.6.3"
+    "coffee-script": "~1.6.3",
+    "oid": "~0.5.1"
   }
 }
